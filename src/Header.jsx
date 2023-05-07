@@ -6,7 +6,7 @@ function Header() {
         <nav>
           <h1 style={{
            backgroundColor: "mediumblue",
-           color: "whitesmoke",
+           color: "#fff",
            textAlign: "center"
           }} >Groceries List</h1>
         </nav>

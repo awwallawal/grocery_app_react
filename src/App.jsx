@@ -6,11 +6,11 @@ import './App.css'
 function App() {
   
   return (
-    <>
+    <div className='App'>
       <Header />
       <MainContent />
       <Footer />
-    </>
+    </div>
   )
 }
 

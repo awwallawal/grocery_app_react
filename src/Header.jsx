@@ -2,9 +2,15 @@ import React from 'react'
 
 function Header() {
   return (
-    <header>
-      <h1>Groceries List</h1>  
-    </header>
+      <header>
+        <nav>
+          <h1 style={{
+           backgroundColor: "mediumblue",
+           color: "whitesmoke",
+           textAlign: "center"
+          }} >Groceries List</h1>
+        </nav>
+      </header>
   )
 }
 

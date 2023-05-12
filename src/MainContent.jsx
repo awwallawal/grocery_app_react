@@ -38,43 +38,54 @@ function MainContent() {
       })
 
       setItems(listItems)
+      localStorage.setItem('shoppingList', JSON.stringify(listItems));
     }
 
   return (
     <main>
-      <ul>
-        {items.map((item) => {
-          return (
-            <li 
-            className='item' 
-            key={item.id}
-            >
-                  <input 
-                  type="checkbox" 
-                  checked={item.checked} 
-                  onClick={() =>{handleChecked(item.id)}} 
-                  />
 
-                  <label 
-                  htmlFor=""
-                  onDoubleClick={() =>{handleChecked(item.id)}}
-                  style={(item.checked) ? {textDecoration: "line-through"} : null}
-                  >
-                    {item.item}
-                  </label>
+      {items.length ? (
+          <ul>
+            {items.map((item) => {
+              return (
+                <li 
+                className='item' 
+                key={item.id}
+                >
+                      <input 
+                      type="checkbox" 
+                      checked={item.checked} 
+                      onClick={() =>{handleChecked(item.id)}} 
+                      />
 
-                  {/* <button>Delete</button>  Replaced the delete button with an icon*/}
+                      <label 
+                      onDoubleClick={() =>{handleChecked(item.id)}}
+                      style={(item.checked) ? {textDecoration: "line-through"} : null}
+                      >
+                        {item.item}
+                      </label>
 
-                  <FaTrashAlt 
-                    onClick={()=>{handleDelete(item.id)}}
-                    role="button"
-                    tabIndex="0"
-                  />
-              
-            </li>
-          )
-        })}
-      </ul>
+                      {/* <button>Delete</button>  Replaced the delete button with an icon*/}
+
+                      <FaTrashAlt 
+                        onClick={()=>{handleDelete(item.id)}}
+                        role="button"
+                        tabIndex="0"
+                      />
+                  
+                </li>
+              )
+            })}
+          </ul>
+      ) : (
+        <p style={{
+          backgroundColor: "Red",
+          color: "royalblue",
+          marginTop: "2rem",
+          padding: "15px"
+        }} >Your shopping list is empty</p>
+      )}
+
     </main>
   )
 }

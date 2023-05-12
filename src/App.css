@@ -58,7 +58,8 @@ main {
  display: flex;
  flex-direction: column;
  flex-grow: 1;
- justify-content: center;
+ justify-content: flex-start;
+ /* Changed the above code to move it from center of page to the begin so that we can add more items to the list and it would grow downwards improving the User Experience */
  align-items: center;
  overflow-y: auto;
 }

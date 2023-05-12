@@ -1,21 +1,20 @@
 import React from 'react'
 
-function Footer() {
-  const thisYear = new Date().getFullYear();
-  const myName = "Awwal";
-  // const footerStyle = {
-  //  backgroundColor: "royalblue",
-  //  color: "whitesmoke",
-  // }
-
+function Footer({year, developer, length}) {
+  
+  
   return (
     <footer>
-      <small> Copyrigth {myName} Development  &copy; {thisYear} </small>
-
-
-      {/* <small style={footerStyle}> Copyrigth {myName} Development  &copy; {thisYear} </small> */}
+      <code>You have {length} list {(length > 1) ? "items" : ((length === 1) ? "item" : " ") } </code>
+      <small> Copyrigth {developer} Development  &copy; {year} </small>
     </footer>
   )
+}
+
+Footer.defaultProps ={
+  year: "20xx",
+  developer: "Developer Name",
+  length: "List of Items"
 }
 
 export default Footer

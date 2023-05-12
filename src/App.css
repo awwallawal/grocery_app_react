@@ -73,6 +73,15 @@ footer {
  place-content: center;
 }
 
+small, code {
+ border: 1px solid gold;
+}
+
+code{ 
+ text-align: center;
+ font-size: large;
+}
+
 ul {
  width: 100%;
  list-style: none;

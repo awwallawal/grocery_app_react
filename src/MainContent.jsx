@@ -6,7 +6,7 @@ function MainContent() {
   const [items, setItems] = useState([
     {
     id: 1,
-    checked: true,
+    checked: false,
     item: "One half pound bag of Cocoa Covered Almonds Unsalted"
     },
     {
@@ -22,28 +22,22 @@ function MainContent() {
     ]);
 
     const handleChecked = (id) => {
-      // alert('Awwal')
-      // alert(`You have cliked Item ${id}`)
-      // We want this handler to do is change the checked boolean from true to false (remember the dice game)
-      // There are ways to achieve this either through the declarative React way or imperative JavaScript way
-
-      /*Imperative Vanilla JavaScript Way
-      const copyItemList = [...items];
-      for (let objects of copyItemList){
-        if(objects.id === id){
-          objects.checked = !objects.checked
-        }
-      }
-      setItems(copyItemList);
-      */
-      // React Declarative Way
-      const ListItems = items.map((item)=>{
+      const listItems = items.map((item)=>{
           if (item.id === id){
             item.checked = ! item.checked
           }
           return item
       })
-      setItems(ListItems);
+      setItems(listItems);
+      localStorage.setItem('shoppingList', JSON.stringify(listItems));
+    }
+
+    const handleDelete = (id) => {
+      const listItems = items.filter((item) => {
+        return item.id !== id
+      })
+
+      setItems(listItems)
     }
 
   return (
@@ -61,13 +55,18 @@ function MainContent() {
                   onClick={() =>{handleChecked(item.id)}} 
                   />
 
-                  <label htmlFor="">
+                  <label 
+                  htmlFor=""
+                  onDoubleClick={() =>{handleChecked(item.id)}}
+                  style={(item.checked) ? {textDecoration: "line-through"} : null}
+                  >
                     {item.item}
                   </label>
 
                   {/* <button>Delete</button>  Replaced the delete button with an icon*/}
 
                   <FaTrashAlt 
+                    onClick={()=>{handleDelete(item.id)}}
                     role="button"
                     tabIndex="0"
                   />

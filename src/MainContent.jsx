@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { FaTrashAlt} from 'react-icons/fa';
+import ItemsList from './ItemsList';
 
 function MainContent({items, handleChecked, handleDelete}) {
   
@@ -8,38 +8,11 @@ function MainContent({items, handleChecked, handleDelete}) {
     <main>
 
       {items.length ? (
-          <ul>
-            {items.map((item) => {
-              return (
-                <li 
-                className='item' 
-                key={item.id}
-                >
-                      <input 
-                      type="checkbox" 
-                      checked={item.checked} 
-                      onClick={() =>{handleChecked(item.id)}} 
-                      />
-
-                      <label 
-                      onDoubleClick={() =>{handleChecked(item.id)}}
-                      style={(item.checked) ? {textDecoration: "line-through"} : null}
-                      >
-                        {item.item}
-                      </label>
-
-                      {/* <button>Delete</button>  Replaced the delete button with an icon*/}
-
-                      <FaTrashAlt 
-                        onClick={()=>{handleDelete(item.id)}}
-                        role="button"
-                        tabIndex="0"
-                      />
-                  
-                </li>
-              )
-            })}
-          </ul>
+         <ItemsList
+          items={items}
+          handleChecked={handleChecked}
+          handleDelete={handleDelete}
+         /> 
       ) : (
         <p style={{
           backgroundColor: "Red",

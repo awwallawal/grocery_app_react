@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import ItemsList from './ItemsList';
 
 function MainContent({items, handleChecked, handleDelete}) {

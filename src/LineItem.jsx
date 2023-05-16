@@ -12,7 +12,7 @@ function LineItem({item, handleChecked, handleDelete}) {
                   <input 
                   type="checkbox" 
                   defaultChecked={item.checked} 
-                  onClick={() =>{handleChecked(item.id)}} 
+                  onChange={() =>{handleChecked(item.id)}} 
                   />
 
                   <label 

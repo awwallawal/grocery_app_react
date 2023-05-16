@@ -5,7 +5,6 @@ function MainContent({items, handleChecked, handleDelete}) {
   
   return (
     <main>
-
       {items.length ? (
          <ItemsList
           items={items}

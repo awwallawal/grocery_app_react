@@ -1,4 +1,5 @@
 import Header from './Header'
+import AddItem from './AddItem';
 import MainContent from './MainContent'
 import Footer from './Footer'
 import './App.css';
@@ -26,6 +27,23 @@ function App() {
       },
     ]);
 
+    const [newItem, setNewItem] = useState("");
+    // Making the code DRYer but not neccessary 
+    function setAndSaveItems (newItems) {
+      setItems(newItems);
+      localStorage.setItem('shoppingList', JSON.stringify(newItems));
+    }
+
+    const addItem = (item) => {
+      // the addItem would come with three parameters as above, i.e: id, checked, item/newItem
+      const id = (items.length) ? items[items.length -1].id + 1 : 1;
+      const myNewItem = { id, checked: false, item};
+      const listItems = [...items, myNewItem];
+      setItems(listItems);
+      localStorage.setItem('shoppingList', JSON.stringify(listItems));
+      // setAndSaveItems(listItems);
+    }
+
     const handleChecked = (id) => {
       const listItems = items.map((item)=>{
           if (item.id === id){
@@ -35,6 +53,8 @@ function App() {
       })
       setItems(listItems);
       localStorage.setItem('shoppingList', JSON.stringify(listItems));
+      // setAndSaveItems(listItems);
+
     }
 
     const handleDelete = (id) => {
@@ -44,14 +64,30 @@ function App() {
 
       setItems(listItems)
       localStorage.setItem('shoppingList', JSON.stringify(listItems));
+      // setAndSaveItems(listItems);
     }
 
     const thisYear = new Date().getFullYear();
     const myName = "Awwal";
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Once you submit the form you need to revert the value of the newItem back to its original state of empty string
+      if (!newItem) return
+      // (!newItem) ? " " :
+      addItem(newItem);
+      // The above line pushes the newItem into the item array unlike using the items.push() method 
+      setNewItem("")
+    }
   
   return (
     <div className='App'>
       <Header  title="Grocery List"/>
+      <AddItem
+        newItem = {newItem}
+        setNewItem = {setNewItem}
+        handleSubmit = {handleSubmit}
+      />
       <MainContent 
         items = {items}
         handleChecked = {handleChecked}

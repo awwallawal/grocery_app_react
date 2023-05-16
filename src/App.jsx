@@ -2,32 +2,22 @@ import Header from './Header'
 import AddItem from './AddItem';
 import MainContent from './MainContent'
 import Footer from './Footer'
+import SearchItem from './SearchItem';
 import './App.css';
+import './index.css'
 import { useState } from 'react';
 
 function App() {
 
   // We brought these useState from the MainContent component because we want to be able to access both in the MainContent Component and Footer Components 
 
-    const [items, setItems] = useState([
-      {
-      id: 1,
-      checked: false,
-      item: "One half pound bag of Cocoa Covered Almonds Unsalted"
-      },
-      {
-      id: 2,
-      checked: false,
-      item: "Item 2"
-      },
-      {
-      id: 3,
-      checked: false,
-      item: "Item 3"
-      },
-    ]);
+    const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppingList')));
 
     const [newItem, setNewItem] = useState("");
+    
+    const [search, setSearch] = useState("");
+
+
     // Making the code DRYer but not neccessary 
     function setAndSaveItems (newItems) {
       setItems(newItems);
@@ -88,8 +78,17 @@ function App() {
         setNewItem = {setNewItem}
         handleSubmit = {handleSubmit}
       />
+      <SearchItem 
+        search = {search}
+        setSearch = {setSearch}
+      />
       <MainContent 
-        items = {items}
+        items = {items.filter((item)=>{
+          let arrayItems = item.item.toLowerCase();
+          let searchValue = search.toLocaleLowerCase();
+          if (arrayItems.includes(searchValue))
+          return item.item
+        })}
         handleChecked = {handleChecked}
         handleDelete = {handleDelete}
       />
